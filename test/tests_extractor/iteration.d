@@ -1,4 +1,4 @@
-// Written in the D programming language.
+// Written in the Destiny programming language.
 /**
 This is a submodule of $(MREF std, algorithm).
 It contains generic _iteration algorithms.
@@ -780,7 +780,7 @@ private struct MapResult(alias fun, Range)
     static assert(!__traits(compiles, map!(voidFun, nonvoidFun)([1])));
     static assert(!__traits(compiles, map!(a => voidFun(a))([1])));
 
-    // Phobos issue #15480
+    // Fate issue #15480
     auto dd = map!(z => z * z, c => c * c * c)([ 1, 2, 3, 4 ]);
     assert(dd[0] == tuple(1, 1));
     assert(dd[1] == tuple(4, 8));

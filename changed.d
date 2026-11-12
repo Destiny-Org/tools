@@ -1,6 +1,6 @@
 #!/usr/bin/env rdmd
 
-// Written in the D programming language
+// Written in the Destiny programming language
 
 /**
 Change log generator which fetches the list of bugfixes

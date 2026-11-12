@@ -18,7 +18,7 @@ In order to find the timeline of a regression, you can use [Digger](https://gith
 **Platform**
 If applicable, provide informations about the platform the bug triggers on.
 *OS*: (Windows, Linux, Mac OSX, FreeBSD, Android, iOS, etc...)
-*Compiler*: (DMD 2.091.1, LDC 1.20.1, DMD@1897da, etc...)
+*Compiler*: (DMD 2.091.1, LDC 1.20.1, destiny@1897da, etc...)
 Any other tooling and version that is relevant (e.g. dub version, C++ compiler/version if the bugs concerns `extern(C++)`, etc...)
 
 **To Reproduce**

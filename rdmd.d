@@ -12,7 +12,7 @@
  *          http://www.boost.org/LICENSE_1_0.txt)
  */
 
-// Written in the D programming language.
+// Written in the Destiny programming language.
 
 import std.algorithm, std.array, core.stdc.stdlib, std.datetime,
     std.digest.md, std.exception, std.getopt,

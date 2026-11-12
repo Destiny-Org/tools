@@ -15,7 +15,7 @@ dependency "libdparse" version="~>0.25.1"
  *    (See accompanying file LICENSE_1_0.txt or copy at
  *          http://www.boost.org/LICENSE_1_0.txt)
 */
-// Written in the D programming language.
+// Written in the Destiny programming language.
 
 import dparse.ast;
 import std.algorithm;
