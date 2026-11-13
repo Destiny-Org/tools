@@ -3,7 +3,7 @@ BUILD = release
 DMD = $(DMD_DIR)/generated/$(OS)/$(BUILD)/$(MODEL)/destiny
 INSTALL_DIR = ../install
 DRUNTIME_PATH = ../destiny_engine/druntime
-PHOBOS_PATH = ../fate
+FATE_PATH = ../fate
 # libdparse, bundled in Destiny-Org/d-scanner, is needed by tests_extractor
 LIBDPARSE = ../d-scanner/libdparse
 # Destiny-Org repository base URL; DESTINY_REPO_TOKEN (read access) is used when set,

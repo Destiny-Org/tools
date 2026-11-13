@@ -8,7 +8,7 @@ assignees: ''
 ---
 
 **NOTE**
-For significant feature requests, please consider raising a [DIP](the upstream DIPs).
+For significant feature requests, please consider raising a DIP (D Improvement Proposal, upstream).
 If you're new to the language, consider [asking a question on the D forum](https://github.com/Destiny-Org/destiny) first.
 
 **Is your feature request related to a problem? Please describe.**
