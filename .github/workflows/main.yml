@@ -21,6 +21,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     env:
+      # read access to the private Destiny-Org repositories, for every clone in the build
+      DESTINY_REPO_TOKEN: ${{ secrets.DESTINY_REPO_TOKEN }}
       N: ${{ startsWith(matrix.os, 'macos') && '3' || '2' }}
     steps:
       - uses: actions/checkout@v4

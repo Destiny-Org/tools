@@ -6,10 +6,17 @@ DRUNTIME_PATH = ../destiny_engine/druntime
 PHOBOS_PATH = ../fate
 # libdparse, bundled in Destiny-Org/d-scanner, is needed by tests_extractor
 LIBDPARSE = ../d-scanner/libdparse
+# Destiny-Org repository base URL; DESTINY_REPO_TOKEN (read access) is used when set,
+# so CI can clone the private repositories
+ifneq ($(DESTINY_REPO_TOKEN),)
+GIT_HOME=https://x-access-token:$(DESTINY_REPO_TOKEN)@github.com/Destiny-Org
+else
+GIT_HOME=https://github.com/Destiny-Org
+endif
 
 
 # Load operating system $(OS) (e.g. linux, osx, ...) and $(MODEL) (e.g. 32, 64) detection Makefile from dmd
-$(shell [ ! -d $(DMD_DIR) ] && git clone --depth=1 https://github.com/Destiny-Org/destiny $(DMD_DIR))
+$(shell [ ! -d $(DMD_DIR) ] && git clone --depth=1 $(GIT_HOME)/destiny $(DMD_DIR))
 include $(DMD_DIR)/compiler/src/osmodel.mak
 
 ifeq (windows,$(OS))
@@ -63,7 +70,10 @@ install: $(TOOLS) $(ROOT)/dustmite$(DOTEXE)
 clean:
 	rm -rf $(GENERATED)
 
-$(ROOT)/tests_extractor$(DOTEXE): tests_extractor.d
+$(LIBDPARSE)/src:
+	git clone --depth=1 $(GIT_HOME)/d-scanner $(LIBDPARSE)/..
+
+$(ROOT)/tests_extractor$(DOTEXE): tests_extractor.d | $(LIBDPARSE)/src
 	mkdir -p $(ROOT)
 	$(DMD) $(DFLAGS) -i -I$(LIBDPARSE)/src $< -of$@
 
