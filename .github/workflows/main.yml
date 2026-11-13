@@ -24,10 +24,12 @@ jobs:
       N: ${{ startsWith(matrix.os, 'macos') && '3' || '2' }}
     steps:
       - uses: actions/checkout@v4
+      # Host compiler from the Destiny-Org mirror (see Destiny-Org/destiny ci/host_compiler.sh)
       - name: Install D compiler
-        uses: dlang-community/setup-dlang@v2
-        with:
-          compiler: ${{ matrix.dc }}
+        shell: bash
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/Destiny-Org/destiny/main/ci/host_compiler.sh -o host_compiler.sh
+          bash host_compiler.sh ${{ matrix.dc }}
       # rdmd_test.d needs this
       - name: Set DMD to its basename without extension
         run: |

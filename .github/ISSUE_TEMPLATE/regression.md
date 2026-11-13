@@ -19,7 +19,7 @@ In order to find the timeline of a regression, you can use [Digger](https://gith
 If applicable, provide informations about the platform the bug triggers on.
 *OS*: (Windows, Linux, Mac OSX, FreeBSD, Android, iOS, etc...)
 *Compiler*: (DMD 2.091.1, LDC 1.20.1, destiny@1897da, etc...)
-Any other tooling and version that is relevant (e.g. dub version, C++ compiler/version if the bugs concerns `extern(C++)`, etc...)
+Any other tooling and version that is relevant (e.g. C++ compiler/version if the bugs concerns `extern(C++)`, etc...)
 
 **To Reproduce**
 A [Short, Self Contained, Correct Example](http://sscce.org/), and the expected behavior vs the actual one.
@@ -32,4 +32,4 @@ void main () { /* Some code */ }
 $ dmd -unittest -run test.d
 test.d(1): Error: cannot implicitly convert expression `a` of type `A` to `B`
 ```
-Screenshot, links to repositories are also welcome, however bear in mind that anything that is self contained is less likely to disappear over time. Note that in order to reduce bugs, you can use [DustMite](https://github.com/CyberShadow/DustMite), which will reduce the bug for you. It is also available via `dub dustmite`.
+Screenshot, links to repositories are also welcome, however bear in mind that anything that is self contained is less likely to disappear over time. Note that in order to reduce bugs, you can use [DustMite](https://github.com/CyberShadow/DustMite), which will reduce the bug for you.

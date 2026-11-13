@@ -1,13 +1,12 @@
-DMD_DIR = ../dmd
+DMD_DIR = ../destiny_engine
 BUILD = release
-DMD = $(DMD_DIR)/generated/$(OS)/$(BUILD)/$(MODEL)/dmd
+DMD = $(DMD_DIR)/generated/$(OS)/$(BUILD)/$(MODEL)/destiny
 INSTALL_DIR = ../install
-DRUNTIME_PATH = ../dmd/druntime
-PHOBOS_PATH = ../phobos
-DUB=dub
+DRUNTIME_PATH = ../destiny_engine/druntime
+PHOBOS_PATH = ../fate
+# libdparse, bundled in Destiny-Org/d-scanner, is needed by tests_extractor
+LIBDPARSE = ../d-scanner/libdparse
 
-WITH_DOC = no
-DOC = ../dlang.org
 
 # Load operating system $(OS) (e.g. linux, osx, ...) and $(MODEL) (e.g. 32, 64) detection Makefile from dmd
 $(shell [ ! -d $(DMD_DIR) ] && git clone --depth=1 https://github.com/Destiny-Org/destiny $(DMD_DIR))
@@ -29,58 +28,35 @@ WARNINGS = -w -de
 DFLAGS = $(MODEL_FLAG) $(if $(findstring windows,$(OS)),,-fPIC) -preview=dip1000
 DFLAGS += $(WARNINGS)
 
-# Default DUB flags (DUB uses a different architecture format)
-DUBFLAGS = --arch=$(subst 32,x86,$(subst 64,x86_64,$(MODEL)))
 
 TOOLS = \
     $(ROOT)/catdoc$(DOTEXE) \
     $(ROOT)/checkwhitespace$(DOTEXE) \
-    $(ROOT)/contributors$(DOTEXE) \
     $(ROOT)/ddemangle$(DOTEXE) \
     $(ROOT)/detab$(DOTEXE) \
     $(ROOT)/rdmd$(DOTEXE) \
     $(ROOT)/tolf$(DOTEXE) \
     $(ROOT)/updatecopyright$(DOTEXE)
 
-CURL_TOOLS = \
-    $(ROOT)/changed$(DOTEXE) \
-    $(ROOT)/dget$(DOTEXE)
-
-DOC_TOOLS = \
-    $(ROOT)/dman$(DOTEXE)
-
 TEST_TOOLS = \
     $(ROOT)/rdmd_test$(DOTEXE)
 
-all: $(TOOLS) $(CURL_TOOLS) $(ROOT)/dustmite$(DOTEXE)
+all: $(TOOLS) $(ROOT)/dustmite$(DOTEXE)
 
 rdmd:      $(ROOT)/rdmd$(DOTEXE)
 ddemangle: $(ROOT)/ddemangle$(DOTEXE)
 catdoc:    $(ROOT)/catdoc$(DOTEXE)
 detab:     $(ROOT)/detab$(DOTEXE)
 tolf:      $(ROOT)/tolf$(DOTEXE)
-dget:      $(ROOT)/dget$(DOTEXE)
-changed:   $(ROOT)/changed$(DOTEXE)
-dman:      $(ROOT)/dman$(DOTEXE)
 dustmite:  $(ROOT)/dustmite$(DOTEXE)
 
 $(ROOT)/dustmite$(DOTEXE): DustMite/dustmite.d DustMite/splitter.d DustMite/polyhash.d
 	$(DMD) $(DFLAGS) -version=Destiny_Tools DustMite/dustmite.d DustMite/splitter.d DustMite/polyhash.d -of$(@)
 
-$(TOOLS) $(DOC_TOOLS) $(CURL_TOOLS) $(TEST_TOOLS): $(ROOT)/%$(DOTEXE): %.d
+$(TOOLS) $(TEST_TOOLS): $(ROOT)/%$(DOTEXE): %.d
 	$(DMD) $(DFLAGS) -of$(@) $(<)
 
-d-tags.json:
-	@echo 'Build d-tags.json and copy it here, e.g. by running:'
-	@echo "    make -C ../dlang.org -f posix.mak d-tags-latest.json && cp ../dlang.org/d-tags-latest.json d-tags.json"
-	@echo 'or:'
-	@echo "    make -C ../dlang.org -f posix.mak d-tags-prerelease.json && cp ../dlang.org/d-tags-prerelease.json d-tags.json"
-	@exit 1
-
-$(ROOT)/dman$(DOTEXE): d-tags.json
-$(ROOT)/dman$(DOTEXE): override DFLAGS += -J.
-
-install: $(TOOLS) $(CURL_TOOLS) $(ROOT)/dustmite$(DOTEXE)
+install: $(TOOLS) $(ROOT)/dustmite$(DOTEXE)
 	mkdir -p $(INSTALL_DIR)/bin
 	cp $^ $(INSTALL_DIR)/bin
 
@@ -89,9 +65,7 @@ clean:
 
 $(ROOT)/tests_extractor$(DOTEXE): tests_extractor.d
 	mkdir -p $(ROOT)
-	DFLAGS="$(DFLAGS)" $(DUB) build \
-		   --single $< --force --compiler=$(DMD) $(DUBFLAGS) \
-		   && mv ./tests_extractor$(DOTEXE) $@
+	$(DMD) $(DFLAGS) -i -I$(LIBDPARSE)/src $< -of$@
 
 ################################################################################
 # Build & run tests
@@ -132,10 +106,6 @@ test_rdmd: $(ROOT)/rdmd_test$(DOTEXE) $(RDMD_TEST_EXECUTABLE)
 	$(DMD) $(DFLAGS) -unittest -main -run rdmd.d
 
 test: test_tests_extractor test_rdmd
-
-ifeq ($(WITH_DOC),yes)
-all install: $(DOC_TOOLS)
-endif
 
 .PHONY: all install clean
 

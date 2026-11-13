@@ -1,8 +1,5 @@
-#!/usr/bin/env dub
-/++dub.sdl:
-name "tests_extractor"
-dependency "libdparse" version="~>0.25.1"
-+/
+#!/usr/bin/env rdmd
+// Needs libdparse (bundled in Destiny-Org/d-scanner); see the Makefile.
 /*
  * Parses all public unittests that are visible in the generated documentation
  * (= annotated with three slashes)
