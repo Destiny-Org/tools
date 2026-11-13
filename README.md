@@ -37,4 +37,3 @@ On a Posix system all tools can be built with:
 ```
 make all
 ```
-
