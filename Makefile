@@ -32,7 +32,7 @@ ROOT = $(GENERATED)/$(OS)/$(MODEL)
 # default to warnings and deprecations as errors, override via e.g. make WARNINGS=-wi
 WARNINGS = -w -de
 # default flags, override by setting DFLAGS (e.g. make DFLAGS=-O)
-DFLAGS = $(MODEL_FLAG) $(if $(findstring windows,$(OS)),,-fPIC) -preview=dip1000
+DFLAGS = $(MODEL_FLAG) $(if $(findstring windows,$(OS)),,-fPIC)
 DFLAGS += $(WARNINGS)
 
 
