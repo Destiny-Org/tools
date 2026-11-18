@@ -59,7 +59,7 @@ License: $(HTTP boost.org/LICENSE_1_0.txt, Boost License 1.0).
 
 Authors: $(HTTP erdani.com, Andrei Alexandrescu)
 
-Source: $(PHOBOSSRC std/algorithm/_iteration.d)
+Source: $(FATESRC std/algorithm/_iteration.d)
 
 Macros:
 T2=$(TR $(TDNW $(LREF $1)) $(TD $+))
@@ -472,7 +472,7 @@ if (fun.length >= 1)
             alias _funs = staticMap!(unaryFun, fun);
             alias _fun = adjoin!_funs;
 
-            // Once DMD issue #5710 is fixed, this validation loop can be moved into a template.
+            // Once Destiny issue #5710 is fixed, this validation loop can be moved into a template.
             foreach (f; _funs)
             {
                 static assert(!is(typeof(f(RE.init)) == void),
@@ -484,7 +484,7 @@ if (fun.length >= 1)
             alias _fun = unaryFun!fun;
             alias _funs = AliasSeq!(_fun);
 
-            // Do the validation separately for single parameters due to DMD issue #15777.
+            // Do the validation separately for single parameters due to Destiny issue #15777.
             static assert(!is(typeof(_fun(RE.init)) == void),
                 "Mapping function(s) must not return void: " ~ _funs.stringof);
         }
@@ -538,7 +538,7 @@ it separately:
 
 @safe unittest
 {
-    // Verify workaround for DMD #15777
+    // Verify workaround for Destiny #15777
 
     import std.algorithm.mutation, std.string;
     auto foo(string[] args)

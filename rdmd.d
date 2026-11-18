@@ -275,10 +275,10 @@ int main(string[] args)
 
     if (lib)
     {
-        // When using -lib, the behavior of the DMD -of switch
+        // When using -lib, the behavior of the Destiny -of switch
         // changes: instead of being relative to the current
         // directory, it becomes relative to the output directory.
-        // When building libraries, DMD does not generate any object
+        // When building libraries, Destiny does not generate any object
         // files; thus, we can override objDir (which is normally a
         // temporary directory) to be the current directory, so that
         // the relative -of path becomes correct.
@@ -541,7 +541,7 @@ private int rebuild(string root, string fullExe,
     {
         auto rspName = buildPath(workDir, "rdmd.rsp");
 
-        // DMD uses Windows-style command-line parsing in response files
+        // Destiny uses Windows-style command-line parsing in response files
         // regardless of the operating system it's running on.
         Filesystem.write(rspName, array(map!escapeWindowsArgument(todo)).join(" "));
 
@@ -610,7 +610,7 @@ private int exec(string[] args)
 
 // Given module rootModule, returns a mapping of all dependees .d
 // source filenames to their corresponding .o files sitting in
-// directory workDir. The mapping is obtained by running dmd -v against
+// directory workDir. The mapping is obtained by running destiny -v against
 // rootModule.
 
 private string[string] getDependencies(string rootModule, string workDir,
@@ -628,7 +628,7 @@ private string[string] getDependencies(string rootModule, string workDir,
         {
             // This can't be 100% precise without knowing exactly where the linker
             // will look for libraries (which requires, but is not limited to,
-            // parsing the linker's command line (as specified in dmd.conf/sc.ini).
+            // parsing the linker's command line (as specified in destiny.conf/sc.ini).
             // Go for best-effort instead.
             string[] dirs = ["."];
             foreach (envVar; ["LIB", "LIBRARY_PATH", "LD_LIBRARY_PATH"])

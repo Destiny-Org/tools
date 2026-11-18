@@ -235,7 +235,7 @@ else
 version (X86_64)
 	version = Intel;
 
-// Hack to work around DMD upstream issue 20677
+// Hack to work around Destiny upstream issue 20677
 version (Intel)
 	public enum modQSupported = size_t.sizeof == 8;
 else

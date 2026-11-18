@@ -17,7 +17,7 @@ Authors:    Iain Buclaw
 Example usage:
 
 ---
-updatecopyright.d --update-year src/dmd
+updatecopyright.d --update-year src/destiny
 ---
 */
 

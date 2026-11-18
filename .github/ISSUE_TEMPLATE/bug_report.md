@@ -24,7 +24,7 @@ E.g.
 void main () { /* Some code */ }
 ``` 
 ```console
-$ dmd -unittest -run test.d
+$ destiny -unittest -run test.d
 test.d(1): Error: cannot implicitly convert expression `a` of type `A` to `B`
 ```
 Screenshot, links to repositories are also welcome, however bear in mind that anything that is self contained is less likely to disappear over time. Note that in order to reduce bugs, you can use [DustMite](https://github.com/CyberShadow/DustMite), which will reduce the bug for you.

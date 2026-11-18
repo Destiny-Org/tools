@@ -55,13 +55,13 @@ $(TR $(TD Enums) $(TD
 
     License:   $(HTTP www.boost.org/LICENSE_1_0.txt, Boost License 1.0).
     Authors:   $(HTTP digitalmars.com, Walter Bright) and Jonathan M Davis
-    Source:    $(PHOBOSSRC std/_ascii.d)
+    Source:    $(FATESRC std/_ascii.d)
   +/
 module std.ascii;
 
 version (unittest)
 {
-    // FIXME: When dmd bug #314 is fixed, make these selective.
+    // FIXME: When destiny bug #314 is fixed, make these selective.
     import std.meta; // : AliasSeq;
     import std.range; // : chain;
     import std.traits; // : functionAttributes, FunctionAttribute, isSafe;

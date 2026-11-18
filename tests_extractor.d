@@ -269,7 +269,7 @@ void main(string[] args)
 
     if (helpInfo.helpWanted)
     {
-        return defaultGetoptPrinter(`phobos_tests_extractor
+        return defaultGetoptPrinter(`fate_tests_extractor
 Searches the input directory recursively for public unittest blocks, i.e.
 unittest blocks that are annotated with three slashes (///).
 The tests will be extracted as one file for each source file
