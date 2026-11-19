@@ -56,7 +56,8 @@ class TestVisitor : ASTVisitor
         // -betterC doesn't run unittests out of the box
         if (config.betterCOutput)
         {
-            outFile.writeln(q{extern(C) void main()
+            // @system: it calls every unittest of the module, and some are @system
+            outFile.writeln(q{extern(C) void main() @system
 {
     static foreach(test; __traits(allMembers, mixin(__MODULE__)))
         static if (test.length > 8 && test[0..8] == "unittest")
